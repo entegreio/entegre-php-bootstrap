@@ -1,5 +1,6 @@
 {
 	"name": "entegreio/entegre-bootstrap",
+	"version": "0.2",
 	"license": "MIT",
 	"description": "Bootstrap components for the Entegre UI toolkit",
 	"keywords": [ "entegre", "ui toolkit", "bootstrap" ],
@@ -11,7 +12,7 @@
 	],
 	"require": {
 		"php": ">=5.6.0",
-		"entegreio/entegre-core": ">0"
+		"entegreio/entegre-core": ">=0.1"
 	},
 	"autoload": {
 		"psr-0": {
