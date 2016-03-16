@@ -7,20 +7,20 @@
  * @copyright 2016 James Linden
  * @license MIT
  */
-
 namespace entegre\bootstrap;
 
 class select {
-
+	
 	use \entegre\factory\attr;
 
 	protected $_items = [];
+
 	protected $_value = null;
 
 	public function __construct( $a = null, $c = null ) {
 		$this->attrs( $a );
 		$this->attr( 'class', 'form-control' );
-		if( !empty( $c ) && is_array( $c ) ) {
+		if( ! empty( $c ) && is_array( $c ) ) {
 			$this->items( $c );
 		}
 	}
@@ -36,7 +36,7 @@ class select {
 	}
 
 	public function item( $l, $v = null, $s = false, $d = false ) {
-		if( !empty( $l ) ) {
+		if( ! empty( $l ) ) {
 			$this->_items[] = [ 'value' => $v, 'label' => $l, 'disabled' => (bool)$d ];
 			if( (bool)$s ) {
 				$this->_value = $v;
@@ -49,9 +49,9 @@ class select {
 		if( is_array( $d ) ) {
 			foreach( $d as $x ) {
 				if( array_key_exists( 'value', $x ) && array_key_exists( 'label', $x ) ) {
-					$this->item( $x['label'], $x['value'] );
+					$this->item( $x[ 'label' ], $x[ 'value' ] );
 				} else {
-					$this->item( $x[0], $x[1] );
+					$this->item( $x[ 0 ], $x[ 1 ] );
 				}
 			}
 		}
@@ -59,14 +59,13 @@ class select {
 	}
 
 	public function build() {
-		global $E;
-		$x = $E->node( 'select', $this->a );
+		$x = \entegre\E( 'select', $this->a );
 		foreach( $this->_items as $y ) {
-			$z = $E->node( 'option', [ 'value' => $y['value'] ], $y['label'] );
-			if( $y['value'] == $this->_value ) {
+			$z = \entegre\E( 'option', [ 'value' => $y[ 'value' ] ] )->child( $y[ 'label' ] );
+			if( $y[ 'value' ] == $this->_value ) {
 				$z->attr( 'selected' );
 			}
-			if( $y['disabled'] === true ) {
+			if( $y[ 'disabled' ] === true ) {
 				$z->attr( 'disabled' );
 			}
 			$x->child( $z );

@@ -7,15 +7,16 @@
  * @copyright 2016 James Linden
  * @license MIT
  */
-
 namespace entegre\bootstrap;
 
 class inputgroup {
-
+	
 	use \entegre\factory\attr;
 
 	protected $_ap = null;
+
 	protected $_as = null;
+
 	protected $_if = null;
 
 	public function __construct( $a = null ) {
@@ -32,35 +33,34 @@ class inputgroup {
 	}
 
 	public function before( $x ) {
-		if( !empty( $x ) ) {
+		if( ! empty( $x ) ) {
 			$this->_ap = $x;
 		}
 		return $this;
 	}
 
 	public function after( $x ) {
-		if( !empty( $x ) ) {
+		if( ! empty( $x ) ) {
 			$this->_as = $x;
 		}
 		return $this;
 	}
 
 	public function field( $x ) {
-		if( !empty( $x ) ) {
+		if( ! empty( $x ) ) {
 			$this->_if = $x;
 		}
 		return $this;
 	}
 
 	public function build() {
-		global $E;
-		$x = $E->node( 'div', $this->a );
-		if( !empty( $this->_ap ) ) {
-			$x->child( $E->node( 'span', [ 'class' => 'input-group-addon' ], $this->_ap ) );
+		$x = \entegre\E( 'div', $this->a );
+		if( ! empty( $this->_ap ) ) {
+			$x->child( \entegre\E( 'span', [ 'class' => 'input-group-addon' ] )->child( $this->_ap ) );
 		}
 		$x->child( $this->_if );
-		if( !empty( $this->_as ) ) {
-			$x->child( $E->node( 'span', [ 'class' => 'input-group-addon' ], $this->_as ) );
+		if( ! empty( $this->_as ) ) {
+			$x->child( \entegre\E( 'span', [ 'class' => 'input-group-addon' ] )->child( $this->_as ) );
 		}
 		return $x->build();
 	}

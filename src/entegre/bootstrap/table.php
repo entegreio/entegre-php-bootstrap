@@ -7,17 +7,20 @@
  * @copyright 2016 James Linden
  * @license MIT
  */
-
 namespace entegre\bootstrap;
 
 class table {
-
+	
 	use \entegre\factory\attr;
 
 	protected $_header = [];
+
 	protected $_row = [];
+
 	private $_mode = [];
+
 	private $_hover = false;
+
 	private $_footer = false;
 
 	public function __construct( $a = null ) {
@@ -69,8 +72,7 @@ class table {
 	}
 
 	public function build() {
-		global $E;
-		$t = $E->node( 'table', [ 'class' => 'table' ] );
+		$t = \entegre\E( 'table', [ 'class' => 'table' ] );
 		$t->attr( $this->a );
 		if( $this->_hover ) {
 			$t->attr( 'class', 'table-hover' );
@@ -82,25 +84,25 @@ class table {
 		if( ap( $this->_header ) ) {
 			$x = [];
 			foreach( $this->_header as $h ) {
-				$x[] = $E->node( 'th', null, $h );
+				$x[] = \entegre\E( 'th' )->child( $h );
 			}
-			$t->child( $E->node( 'thead', null, $x ) );
+			$t->child( \entegre\E( 'thead' )->child( $x ) );
 			if( $this->_footer ) {
-				$tf = $E->node( 'tfoot', null, $x );
+				$tf = \entegre\E( 'tfoot' )->child( $x );
 			}
 		}
 		if( ap( $this->_row ) ) {
-			$tb = $E->node( 'tbody' );
+			$tb = \entegre\E( 'tbody' );
 			foreach( $this->_row as $r ) {
-				$tr = $E->node( 'tr' );
+				$tr = \entegre\E( 'tr' );
 				foreach( $r as $c ) {
-					$tr->child( $E->node( 'td', null, $c ) );
+					$tr->child( \entegre\E( 'td' )->child( $c ) );
 				}
 				$tb->child( $tr );
 			}
 			$t->child( $tb );
 		}
-		if( !empty( $tf ) ) {
+		if( ! empty( $tf ) ) {
 			$t->child( $tf );
 		}
 		return $t->build();

@@ -7,11 +7,10 @@
  * @copyright 2016 James Linden
  * @license MIT
  */
-
 namespace entegre\bootstrap;
 
 class bulletlist {
-
+	
 	use \entegre\factory\attr;
 	use \entegre\factory\children;
 
@@ -39,12 +38,11 @@ class bulletlist {
 	}
 
 	public function build() {
-		global $E;
-		$x = $E->node( "{$this->_t}l" );
+		$x = \entegre\E( "{$this->_t}l" );
 		$x->attrs( $this->a );
 		if( ap( $this->c ) ) {
 			foreach( $this->c as $c ) {
-				$x->child( $E->node( 'li', null, $c ) );
+				$x->child( \entegre\E( 'li' )->child( $c ) );
 			}
 		}
 		return $x->build();

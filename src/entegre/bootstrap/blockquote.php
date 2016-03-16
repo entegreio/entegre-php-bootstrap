@@ -7,15 +7,15 @@
  * @copyright 2016 James Linden
  * @license MIT
  */
-
 namespace entegre\bootstrap;
 
 class blockquote {
-
+	
 	use \entegre\factory\attr;
 	use \entegre\factory\children;
 
 	private $_reverse = false;
+
 	private $_footer = [];
 
 	public function __construct( $a = null ) {
@@ -28,20 +28,19 @@ class blockquote {
 	}
 
 	public function footer( $x ) {
-		if( !empty( $x ) ) {
+		if( ! empty( $x ) ) {
 			$this->_footer[] = $x;
 		}
 		return $this;
 	}
 
 	public function build() {
-		global $E;
-		$x = $E->node( 'blockquote', $this->a, $this->c );
+		$x = \entegre\E( 'blockquote', $this->a )->child( $this->c );
 		if( $this->_reverse ) {
 			$x->attr( 'class', 'blockquote-reverse' );
 		}
 		if( ap( $this->_footer ) ) {
-			$x->child( $E->node( 'footer', null, $this->_footer ) );
+			$x->child( \entegre\E( 'footer' )->child( $this->_footer ) );
 		}
 		return $x->build();
 	}

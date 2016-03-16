@@ -7,15 +7,16 @@
  * @copyright 2016 James Linden
  * @license MIT
  */
-
 namespace entegre\bootstrap;
 
 class radio {
-
+	
 	use \entegre\factory\attr;
 
 	protected $_label = null;
+
 	protected $_inline = false;
+
 	protected $_disabled = false;
 
 	public function __construct( $a = null ) {
@@ -38,22 +39,21 @@ class radio {
 	}
 
 	public function build() {
-		global $E;
-		$x = $E->node( 'label' );
+		$x = \entegre\E( 'label' );
 		if( $this->_inline ) {
 			$x->attr( 'class', 'radio-inline' );
 		}
-		$y = $E->node( 'input', [ 'type' => 'radio' ] );
+		$y = \entegre\E( 'input', [ 'type' => 'radio' ] );
 		$y->attr( $this->a );
 		if( $this->_disabled ) {
 			$y->attr( 'disabled', 'true' );
 		}
 		$x->child( $y );
-		if( !empty( $this->_label ) ) {
+		if( ! empty( $this->_label ) ) {
 			$x->child( $this->_label );
 		}
-		if( !$this->_inline ) {
-			$x = $E->node( 'div', [ 'class' => 'radio' ], $x );
+		if( ! $this->_inline ) {
+			$x = \entegre\E( 'div', [ 'class' => 'radio' ] )->child( $x );
 			if( $this->_disabled ) {
 				$x->attr( 'disabled', 'true' );
 			}

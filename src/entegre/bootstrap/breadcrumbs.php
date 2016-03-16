@@ -7,11 +7,10 @@
  * @copyright 2016 James Linden
  * @license MIT
  */
-
 namespace entegre\bootstrap;
 
 class breadcrumbs {
-
+	
 	use \entegre\factory\attr;
 
 	private $_items = [];
@@ -26,16 +25,15 @@ class breadcrumbs {
 	}
 
 	public function build() {
-		global $E;
-		$x = $E->node( 'ol', [ 'class' => 'breadcrumb' ] );
+		$x = \entegre\E( 'ol', [ 'class' => 'breadcrumb' ] );
 		$x->attr( $this->a );
 		foreach( $this->_items as $c ) {
-			$l = $E->node( 'li' );
-			if( $c['active'] === true ) {
+			$l = \entegre\E( 'li' );
+			if( $c[ 'active' ] === true ) {
 				$l->attr( 'class', 'active' );
-				$l->child( $c['label'] );
+				$l->child( $c[ 'label' ] );
 			} else {
-				$l->child( $E->node( 'a', [ 'href' => $c['url'] ], $c['label'] ) );
+				$l->child( \entegre\E( 'a', [ 'href' => $c[ 'url' ] ] )->child( $c[ 'label' ] ) );
 			}
 			$x->child( $l );
 		}

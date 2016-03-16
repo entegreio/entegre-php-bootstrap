@@ -7,11 +7,10 @@
  * @copyright 2016 James Linden
  * @license MIT
  */
-
 namespace entegre\bootstrap;
 
 class alert extends \entegre\factory\node {
-
+	
 	use \entegre\bootstrap\factory\mode;
 
 	public function __construct( $a = null, $c = null ) {
@@ -21,9 +20,8 @@ class alert extends \entegre\factory\node {
 	}
 
 	public function callout( $x ) {
-		if( !empty( $x ) ) {
-			global $E;
-			$this->child( $E->node( 'strong', null, $x ) )->child( ' ' );
+		if( ! empty( $x ) ) {
+			$this->child( \entegre\E( 'strong' )->child( $x )->child( ' ' ) );
 		}
 		return $this;
 	}
